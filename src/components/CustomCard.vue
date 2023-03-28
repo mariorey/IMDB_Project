@@ -54,6 +54,12 @@ export default {
     width: 100%;
     height: 100%;
     font-size:1em;
+    &__image{
+      width: 100%;
+      max-width: 264px;
+      height: 388px;
+
+    }
   }
 
 }
