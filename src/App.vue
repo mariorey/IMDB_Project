@@ -54,14 +54,13 @@ export default defineComponent({
       margin-right: 0;
       margin-left: 0;
       &--img{
-        width: 40vw;
-        min-width:400px;
+        width: 30vw;
       }
     }
     &__buttons{
       display:flex;
       flex-direction: row;
-      font-size: 3em;
+      font-size: 1em;
     }
   }
 

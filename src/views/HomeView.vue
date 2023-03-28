@@ -6,12 +6,10 @@ import CustomCarousel from '../components/CustomCarousel.vue'
 
 <template>
 
-  <header>
     <div class="search">
       <CustomSearch/>
     </div>
-  </header>
-  <main>
+  <main class="container">
     <div class="trending">
       <h2 class="trending__title">TRENDING</h2>
       <CustomCarousel></CustomCarousel>
@@ -22,6 +20,11 @@ import CustomCarousel from '../components/CustomCarousel.vue'
 </template>
 
 <style scoped lang="scss">
+.container{
+  display:flex;
+  flex-direction: column;
+  margin-left: -1em;
+}
 
 .navigation {
   display:flex;
@@ -61,27 +64,10 @@ import CustomCarousel from '../components/CustomCarousel.vue'
 
 
 @media (max-width: 1024px) {
-  .navigation {
-    flex-direction: column;
-    align-items: center;
-    &__logo{
-      margin-right: 0;
-      margin-left: 0;
-      &--img{
-        width: 40vw;
-        min-width:400px;
-      }
-    }
-    &__buttons{
-      display:flex;
-      flex-direction: row;
-      font-size: 3em;
-    }
-  }
-
   .trending{
     &__title{
-      font-size: 4em;
+      font-size: 1.5em;
+      max-width: 95%;
     }
   }
 

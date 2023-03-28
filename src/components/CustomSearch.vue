@@ -28,8 +28,9 @@ export default {
 @media only screen and (max-width: 1024px)  {
   .search{
     width: 80%;
-    height: 16vh;
-    font-size: 4em;
+    height: 4vh;
+    font-size: 0.8em;
+    margin-bottom: -2em;
   }
 }
 </style>

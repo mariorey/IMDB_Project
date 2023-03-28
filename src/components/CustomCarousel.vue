@@ -77,8 +77,8 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   position:relative;
-  min-width:80em;
-  width:80vw;
+  min-width:80%;
+  width:90vw;
   max-width: 80vw;
   margin-top: 1em;
 }
@@ -116,9 +116,10 @@ export default {
 
 @media (max-width: 1024px) {
   .sliding{
-   margin-right: 2em;
+   max-width: 90%;
   }
   .scroll{
+
 
   }
 

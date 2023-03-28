@@ -34,8 +34,9 @@ export default {
 .film{
   background: #2d2d2d;
   color: white;
-  width: 250px;
-  height: 470px;
+  width: 95%;
+
+  height: 100%;
   font-size: 1.5em;
   &__description{
     display:flex;
@@ -43,37 +44,18 @@ export default {
     margin-left: 0.5em;
   }
   &__image{
-    width: 250px;
+    width: 100%;
     height: 388px;
 
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 1024px) {
   .film{
-    width: 90%;
-    height: 90%;
-    font-size:4em;
-   &__image{
-     width: 100%;
-     height: 90%;
-
-   }
+    width: 100%;
+    height: 100%;
+    font-size:1em;
   }
 
 }
 
-@media (max-width: 1024px) and (min-width: 700px) {
-  .film{
-    width:40%;
-    max-width: 800px;
-    height: 85%;
-    font-size:3em;
-    &__image{
-      width: 100%;
-      height: 90%;
-
-    }
-  }
-
-}
 </style>
