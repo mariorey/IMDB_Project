@@ -19,8 +19,8 @@ export default {
       default: 'No title'
     },
     rating: {
-      type: Number,
-      default: 3.5
+      type: String,
+      default: "3.5"
     },
     imageSrc: {
       type: String,

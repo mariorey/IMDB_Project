@@ -1,37 +1,27 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import CustomSearch from './components/CustomSearch.vue'
-import CustomNavigation from './components/CustomNavigation.vue'
-import CustomCarousel from './components/CustomCarousel.vue'
-</script>
-
 <template>
   <header>
-      <div class="navigation">
-        <div class="navigation__logo">
-          <img class="navigation__logo--img" src="./assets/logo.png">
-        </div>
-        <div class="navigation__buttons">
-          <CustomNavigation/>
-        </div>
+    <div class="navigation">
+      <div class="navigation__logo">
+        <img class="navigation__logo--img" src="./assets/logo.png">
       </div>
-    <RouterView />
-    <div class="search">
-      <CustomSearch/>
+      <div class="navigation__buttons">
+        <CustomNavigation/>
+      </div>
     </div>
   </header>
-  <main>
-    <div class="trending">
-      <h2 class="trending__title">TRENDING</h2>
-      <CustomCarousel></CustomCarousel>
-    </div>
-  </main>
-
-
+  <RouterView />
 </template>
+<script>
+import {defineComponent} from "vue";
+import CustomNavigation from "@/components/CustomNavigation.vue";
 
-<style scoped lang="scss">
+export default defineComponent({
+  components: {CustomNavigation}
+})
 
+
+</script>
+<style lang="scss" scoped>
 .navigation {
   display:flex;
   flex-direction: row;
@@ -40,25 +30,12 @@ import CustomCarousel from './components/CustomCarousel.vue'
   &__logo{
     margin-right: 40%;
     margin-left: 4em;
-  &--img{
-      height: 30%;
+    &--img{
+      width: 40%;
     }
   }
 }
-.search{
-  display: flex;
-  justify-content: center;
-}
 
-.trending{
-  display:flex;
-  flex-direction: column;
-  align-items:center;
-  margin-top:3em;
-  &__title{
-    color:white;
-  }
-}
 
 :root {
   --font-fam: 'Lato', sans-serif;
@@ -88,11 +65,6 @@ import CustomCarousel from './components/CustomCarousel.vue'
     }
   }
 
-.trending{
-  &__title{
-    font-size: 4em;
-  }
-}
 
 }
 </style>
