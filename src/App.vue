@@ -9,12 +9,13 @@ import CustomCarousel from './components/CustomCarousel.vue'
   <header>
       <div class="navigation">
         <div class="navigation__logo">
-          <img src="./assets/logo.png" style="height:4em">
+          <img class="navigation__logo--img" src="./assets/logo.png">
         </div>
         <div class="navigation__buttons">
           <CustomNavigation/>
         </div>
       </div>
+    <RouterView />
     <div class="search">
       <CustomSearch/>
     </div>
@@ -26,7 +27,7 @@ import CustomCarousel from './components/CustomCarousel.vue'
     </div>
   </main>
 
-  <RouterView />
+
 </template>
 
 <style scoped lang="scss">
@@ -37,8 +38,11 @@ import CustomCarousel from './components/CustomCarousel.vue'
   justify-content: center;
   margin-top: 1em;
   &__logo{
-    margin-right: 70em;
-
+    margin-right: 40%;
+    margin-left: 4em;
+  &--img{
+      height: 30%;
+    }
   }
 }
 .search{
@@ -66,7 +70,29 @@ import CustomCarousel from './components/CustomCarousel.vue'
 
 
 @media (max-width: 1024px) {
+  .navigation {
+    flex-direction: column;
+    align-items: center;
+    &__logo{
+      margin-right: 0;
+      margin-left: 0;
+      &--img{
+        width: 40vw;
+        min-width:400px;
+      }
+    }
+    &__buttons{
+      display:flex;
+      flex-direction: row;
+      font-size: 3em;
+    }
+  }
 
+.trending{
+  &__title{
+    font-size: 4em;
+  }
+}
 
 }
 </style>
