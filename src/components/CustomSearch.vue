@@ -25,9 +25,11 @@ export default {
    outline-width: 0;
  }
 }
-@media only screen and (max-width: 830px)  {
+@media only screen and (max-width: 1024px)  {
   .search{
     width: 80%;
+    height: 16vh;
+    font-size: 4em;
   }
 }
 </style>

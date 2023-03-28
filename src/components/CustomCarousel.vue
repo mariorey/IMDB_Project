@@ -73,7 +73,6 @@ export default {
 
 
 .sliding{
-  border: 1px solid white;
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
@@ -101,7 +100,7 @@ export default {
 .item-list{
   display: flex;
   flex-flow: row nowrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .right {
@@ -117,8 +116,10 @@ export default {
 
 @media (max-width: 1024px) {
   .sliding{
-    width: 100vw;
-    max-width: 100vw;
+   margin-right: 2em;
+  }
+  .scroll{
+
   }
 
 }

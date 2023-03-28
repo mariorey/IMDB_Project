@@ -3,7 +3,7 @@
     <img class="film__image" v-bind:alt="'Film image of' + title" v-bind:src="imageSrc"/>
     <div class="film__description">
       <span class="film__description--title">{{ title }}</span>
-      <span class="film__description--rating">{{ rating }}<img src="../assets/star.png" style="height:15px;"></span>
+      <span class="film__description--rating">{{ rating }}<img src="../assets/star.png" style="height:1em;"></span>
 
     </div>
   </article>
@@ -34,8 +34,8 @@ export default {
 .film{
   background: #2d2d2d;
   color: white;
-  height: content-box;
-  max-width:270px;
+  width: 250px;
+  height: 470px;
   font-size: 1.5em;
   &__description{
     display:flex;
@@ -43,21 +43,36 @@ export default {
     margin-left: 0.5em;
   }
   &__image{
-    height:380px;
-    width:270px;
+    width: 250px;
+    height: 388px;
 
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 700px) {
   .film{
-    max-width: 600px;
-    max-height: 800px;
+    width: 90%;
+    height: 90%;
+    font-size:4em;
    &__image{
-     height: 800px;
-
-     width: 600px;
+     width: 100%;
+     height: 90%;
 
    }
+  }
+
+}
+
+@media (max-width: 1024px) and (min-width: 700px) {
+  .film{
+    width:40%;
+    max-width: 800px;
+    height: 85%;
+    font-size:3em;
+    &__image{
+      width: 100%;
+      height: 90%;
+
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 <template>
-  <div class="navigation">
-    <RouterLink class="navigation--home" to="/">HOME</RouterLink>
-    <RouterLink class="navigation--discover" to="/discover">DISCOVER</RouterLink>
+  <div class="wrapper">
+    <RouterLink class="wrapper--home" to="/">HOME</RouterLink>
+    <RouterLink class="wrapper--discover" to="/discover">DISCOVER</RouterLink>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.navigation {
+.wrapper {
   display: flex;
   flex-direction: row;
   position:relative;
@@ -21,9 +21,12 @@ export default {
     color:#E50914;
     color-border-hover:#E50914;
     margin-right: 1em;
+    margin-left: 3em;
+
   }
   &--discover{
     color:#E50914;
+    margin-right: 2em;
 
   }
 }
@@ -42,4 +45,10 @@ a {
   }
 }
 
+@media (max-width: 1024px) {
+  .navigation--home{
+    margin-right: 1em;
+  }
+
+}
 </style>
