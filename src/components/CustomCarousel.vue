@@ -105,13 +105,33 @@ export default {
 
 .right {
   position: absolute;
-  right: 0;
+  right: -10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor:pointer;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Andale Mono";
+  height: 2em;
+  width: 1.5em;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 .left {
   position: absolute;
-  left: 0;
-  z-index:1
+  left: -10px;
+  cursor:pointer;
+  z-index:1;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Andale Mono";
+  height: 2em;
+  width: 1.5em;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 @media (max-width: 1024px) {
