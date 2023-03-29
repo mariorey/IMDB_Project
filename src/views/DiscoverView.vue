@@ -7,7 +7,7 @@
         <p class="option__image--title">Reggaeton</p>
       </div>
       <div class="option">
-        <img class="option__image" src="../assets/classical.png" alt="Música clásica">
+        <img class="option__image" src="https://o.remove.bg/downloads/d2da1fa5-5a29-4cf3-945c-8d0e5359ce92/image-removebg-preview.png" alt="Música clásica">
         <p class="option__image--title">Música clásica</p>
       </div>
     </div>
