@@ -47,7 +47,7 @@ export default {
   <div class="sliding">
     <button class="left" v-on:click="scrollLeftButton"> &lt; </button>
     <div class="scroll" ref="scroll" @mousedown="startDragging" @mousemove="dragging" @mouseup="stopDragging">
-    <div class="item-list">
+      <div class="item-list">
         <CustomCard imageSrc="https://pics.filmaffinity.com/Malditos_vecinos-933128749-large.jpg" rating="3.5" title="Neighbors"/>
         <CustomCard imageSrc="https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg" title="Nemo" rating="4.2"/>
         <CustomCard title="Alice in wonderland" rating="3" imageSrc="https://lumiere-a.akamaihd.net/v1/images/p_aliceinwonderland_19875_ad409a49.jpeg"/>
@@ -60,8 +60,8 @@ export default {
         <CustomCard title="Citizen Kane" imageSrc="https://upload.wikimedia.org/wikipedia/commons/c/c0/Citizen_Kane_poster%2C_1941_%28Style_B%2C_unrestored%29.jpg"/>
         <CustomCard title="Memento" imageSrc="https://m.media-amazon.com/images/M/MV5BZTcyNjk1MjgtOWI3Mi00YzQwLWI5MTktMzY4ZmI2NDAyNzYzXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg"/>
         <CustomCard title="Interstellar" imageSrc="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"/>
-      <CustomCard title="The Hunger Games: Mockingjay" rating="3.8" imageSrc="https://m.media-amazon.com/images/M/MV5BMTcxNDI2NDAzNl5BMl5BanBnXkFtZTgwODM3MTc2MjE@._V1_.jpg"/>
-    </div>
+        <CustomCard title="The Hunger Games: Mockingjay" rating="3.8" imageSrc="https://m.media-amazon.com/images/M/MV5BMTcxNDI2NDAzNl5BMl5BanBnXkFtZTgwODM3MTc2MjE@._V1_.jpg"/>
+      </div>
     </div>
     <button class="right" v-on:click="scrollRight"> > </button>
   </div>
@@ -105,18 +105,38 @@ export default {
 
 .right {
   position: absolute;
-  right: 0;
+  right: -10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor:pointer;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Andale Mono";
+  height: 2em;
+  width: 1.5em;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 .left {
   position: absolute;
-  left: 0;
-  z-index:1
+  left: -10px;
+  cursor:pointer;
+  z-index:1;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Andale Mono";
+  height: 2em;
+  width: 1.5em;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 @media (max-width: 1024px) {
   .sliding{
-   max-width: 90%;
+    max-width: 90%;
   }
   .scroll{
 
