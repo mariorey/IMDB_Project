@@ -1,7 +1,9 @@
 <template>
-  <CustomQuiz
-      question="¿Qué estilo de música prefieres?"
-      :options="[
+  <div class="discover">
+    <Transition name="fade" @after-leave="showQuestion=2">
+      <CustomQuiz
+          question="¿Qué estilo de música prefieres?"
+          :options="[
         {
           image: 'https://cdn-profiles.tunein.com/s238570/images/logog.png?t=158749',
           title: 'Reggaeton'
@@ -11,40 +13,54 @@
           title: 'Música clásica'
         }
       ]" :onOptionSelected="selectOption"
-      v-if="showQuestion==1"/>
-  <CustomQuiz
-      question="¿Qué estilo de música prefieres?"
-      :options="[
+          v-show="showQuestion==1"/>
+    </Transition>
+    <Transition name="fade" @after-leave="showQuestion=3">
+      <CustomQuiz
+          question="¿Qué género te apetece más?"
+          :options="[
         {
-          image: 'https://cdn-profiles.tunein.com/s238570/images/logog.png?t=158749',
-          title: 'PRUEBA 1'
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Comedy_film_icon.svg/1024px-Comedy_film_icon.svg.png',
+          title: 'COMEDIA'
         },
         {
-          image: '../src/assets/classical.png',
-          title: 'PRUEBA 2'
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Drama-film-stub-icon.svg/768px-Drama-film-stub-icon.svg.png',
+          title: 'DRAMA'
         }
       ]" :onOptionSelected="selectOption"
-      v-if="showQuestion==2"/>
-  <CustomQuiz
-      question="¿Qué estilo de música prefieres?"
-      :options="[
+          v-show="showQuestion==2"/>
+    </Transition>
+    <Transition name="fade" @after-leave="showQuestion=4">
+      <CustomQuiz
+          question="¿Cuánto tiempo tienes?"
+          :options="[
         {
-          image: 'https://cdn-profiles.tunein.com/s238570/images/logog.png?t=158749',
-          title: 'PRUEBA  3'
+          image: 'https://cdn-icons-png.flaticon.com/512/6520/6520467.png',
+          title: 'Menos de 2 horas'
         },
         {
-          image: '../src/assets/classical.png',
-          title: 'PRUEBA 4'
+          image: 'https://static.vecteezy.com/system/resources/previews/010/927/281/non_2x/two-hour-arrow-icon-on-white-background-2-hours-sign-timer-symbol-flat-style-vector.jpg',
+          title: 'Más de 2 horas'
         }
       ]" :onOptionSelected="selectOption"
-      v-if="showQuestion==3"/>
+          v-show="showQuestion==3"/>
+    </Transition>
+    <Transition name="fade">
+      <div class="card-wrapper" v-show="showQuestion==4">
+        <h2>Esta es la película recomendada para ti</h2>
+        <CustomCard rating="3.5" title="Cars" imageSrc="https://pics.filmaffinity.com/Cars-746710621-large.jpg" />
+      </div>
+    </Transition>
+  </div>
+
 </template>
 <script>
 import { defineComponent } from "vue";
 import CustomQuiz from "@/components/CustomQuiz.vue";
+import CustomCard from "@/components/CustomCard.vue";
 
 export default defineComponent({
-  components: { CustomQuiz },
+  components: { CustomQuiz, CustomCard },
   data() {
     return {
       selectedOption:[] ,
@@ -54,7 +70,7 @@ export default defineComponent({
   methods: {
     selectOption(title) {
       this.selectedOption.push(title);
-      this.showQuestion ++;
+      this.showQuestion = 0;
     },
   },
 });
@@ -96,6 +112,25 @@ export default defineComponent({
       color: lightgrey;
     }
   }
+}
+.card-wrapper {
+  display: flex;
+  color: lightgrey;
+  font-family: Roboto, sans-serif;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 264px;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+transition: 0.3s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity:0;
+  transform: scale(0.3);
 }
 
 
