@@ -1,18 +1,64 @@
 <template>
-  <div class="discover">
-    <h2 class="discover__question">¿Qué estilo de música prefieres?</h2>
-    <div class="options">
-      <div class="option">
-        <img class="option__image" src="https://cdn-profiles.tunein.com/s238570/images/logog.png?t=158749" alt="Reggaeton">
-        <p class="option__image--title">Reggaeton</p>
-      </div>
-      <div class="option">
-        <img class="option__image" src="../assets/classical.png" alt="Música clásica">
-        <p class="option__image--title">Música clásica</p>
-      </div>
-    </div>
-  </div>
+  <CustomQuiz
+      question="¿Qué estilo de música prefieres?"
+      :options="[
+        {
+          image: 'https://cdn-profiles.tunein.com/s238570/images/logog.png?t=158749',
+          title: 'Reggaeton'
+        },
+        {
+          image: '../src/assets/classical.png',
+          title: 'Música clásica'
+        }
+      ]" :onOptionSelected="selectOption"
+      v-if="showQuestion==1"/>
+  <CustomQuiz
+      question="¿Qué estilo de música prefieres?"
+      :options="[
+        {
+          image: 'https://cdn-profiles.tunein.com/s238570/images/logog.png?t=158749',
+          title: 'PRUEBA 1'
+        },
+        {
+          image: '../src/assets/classical.png',
+          title: 'PRUEBA 2'
+        }
+      ]" :onOptionSelected="selectOption"
+      v-if="showQuestion==2"/>
+  <CustomQuiz
+      question="¿Qué estilo de música prefieres?"
+      :options="[
+        {
+          image: 'https://cdn-profiles.tunein.com/s238570/images/logog.png?t=158749',
+          title: 'PRUEBA  3'
+        },
+        {
+          image: '../src/assets/classical.png',
+          title: 'PRUEBA 4'
+        }
+      ]" :onOptionSelected="selectOption"
+      v-if="showQuestion==3"/>
 </template>
+<script>
+import { defineComponent } from "vue";
+import CustomQuiz from "@/components/CustomQuiz.vue";
+
+export default defineComponent({
+  components: { CustomQuiz },
+  data() {
+    return {
+      selectedOption:[] ,
+      showQuestion: 1,
+    };
+  },
+  methods: {
+    selectOption(title) {
+      this.selectedOption.push(title);
+      this.showQuestion ++;
+    },
+  },
+});
+</script>
 <style lang="scss">
 .discover {
   display: flex;

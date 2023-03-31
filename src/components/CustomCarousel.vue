@@ -116,6 +116,9 @@ export default {
   width: 1.5em;
   border: 1px solid white;
   border-radius: 5px;
+  &:hover{
+    color: rgba(255,0,0,0.8)
+  }
 }
 
 .left {
@@ -132,6 +135,9 @@ export default {
   width: 1.5em;
   border: 1px solid white;
   border-radius: 5px;
+  &:hover{
+    color: rgba(255,0,0,0.8)
+  }
 }
 
 @media (max-width: 1024px) {
