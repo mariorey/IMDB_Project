@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import CustomSearch from '../components/CustomSearch.vue'
 import CustomCarousel from '../components/CustomCarousel.vue'
+import CustomFilter from '../components/CustomFilter.vue'
 </script>
 
 <template>
@@ -51,6 +52,8 @@ import CustomCarousel from '../components/CustomCarousel.vue'
   margin-top:3em;
   &__title{
     color:white;
+    font-size: 2em;
+    font-weight: bold;
   }
 }
 

@@ -1,18 +1,26 @@
 <template>
-
+<div class="wrapper">
   <input class="search" placeholder="Search for a film" v-on:input="$emit('textInput',$event)"/>
-  <button class="filter-button">FILTERS</button>
+  <CustomFilter></CustomFilter>
+</div>
 </template>
 
 <script>
+import CustomFilter from './CustomFilter.vue';
 export default {
+  components: {CustomFilter},
   name: "CustomSearch"
 }
 </script>
 
 <style scoped lang="scss">
+.wrapper{
+display: flex;
+flex-direction: column;
+}
+
 .search {
-  width: 40vw;
+  width: 80vw;
   height: 44px;
   font-size: 0.8em;
   border:none;
@@ -29,22 +37,10 @@ export default {
 }
 
 
-.filter-button {
-  margin-left: 10px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.filter-button:hover {
-  background-color: #e53935;
-}
+
 @media only screen and (max-width: 1024px)  {
   .search{
-    width: 80%;
+    width: 80vw;
     height: 4vh;
     font-size: 0.8em;
     margin-bottom: -2em;
