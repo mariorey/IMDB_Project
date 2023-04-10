@@ -31,7 +31,6 @@ import CustomResults from "@/components/CustomResults.vue";
 .container{
   display:flex;
   flex-direction: column;
-  margin-left: -1em;
 }
 
 .navigation {

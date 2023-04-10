@@ -1,5 +1,5 @@
 <template>
-  <button class="filter-button" @click="toggleFilters">FILTERS</button>
+  <button class="filter-button" v-on:click="toggleFilters">FILTERS</button>
   <div class="filters" :class="{ 'show-filters': showFilters }">
     <button class=filters--close v-on:click="hideFilters" >X</button>
     <div class="filters__year">
@@ -64,14 +64,16 @@ export default {
 .filters {
   position: fixed;
   top: 0;
-  z-index:1;
-  right: -400px;
+  z-index:2;
+  right: 0;
   width: 400px;
   height: 100%;
   border-left: 1px solid white;
 
   background-color: black;
-  transition: all 0.3s ease;
+  transition: transform 0.4s ease;
+  transform: translateX(100%);
+
   &--close{
     position: absolute;
     top: 0;
@@ -88,7 +90,7 @@ export default {
 }
 
 .show-filters {
-  right: 0;
+  transform: translateX(0);
 }
 
 .filters__year{
@@ -118,6 +120,16 @@ export default {
     width: 100px;
     cursor: pointer;
   }
+}
+
+@media only screen and (max-width: 1024px) {
+  .filters{
+    width: 100%;
+  }
+  .filter-button{
+    align-self: center;
+  }
+
 }
 
 </style>

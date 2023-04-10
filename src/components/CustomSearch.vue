@@ -47,10 +47,14 @@ flex-direction: column;
     width: 80vw;
     height: 4vh;
     font-size: 0.8em;
-    margin-bottom: -2em;
   }
   .filter-button {
     display:none;
+  }
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+   
   }
 }
 </style>
