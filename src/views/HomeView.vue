@@ -60,6 +60,7 @@ import CustomResults from "@/components/CustomResults.vue";
     color:white;
     font-size: 2em;
     font-weight: bold;
+    margin-top: -1.8em;
   }
 }
 
@@ -72,6 +73,7 @@ import CustomResults from "@/components/CustomResults.vue";
     color:white;
     font-size: 2em;
     font-weight: bold;
+    margin-top: -1.8em;
   }
 }
 

@@ -5,6 +5,8 @@ export const store = createStore({
         films: [],
         trendings: [],
         query: '',
+        ageFilter: [],
+        genreFilter: '',
     },
     getters: {
         getFilms(state){
@@ -21,6 +23,9 @@ export const store = createStore({
         setTrending(state, trendings){
             state.trendings = trendings
         },
+        setGenreFilter(state, genre){
+            state.genreFilter = genre
+        },
     },
     actions: {
         fetchFilm(state, query){
@@ -34,7 +39,7 @@ export const store = createStore({
             }, 500);
         },
         fetchTrending(state){
-            fetch('https://api.themoviedb.org/3//trending/movie/week?api_key=328ffe84a89f269e32f7d765b670b911')
+            fetch('https://api.themoviedb.org/3/trending/movie/week?api_key=328ffe84a89f269e32f7d765b670b911')
                 .then(response => response.json())
                 .then(data => {
                     this.commit('setTrending', data.results);
