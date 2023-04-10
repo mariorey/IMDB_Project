@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-  <input class="search" placeholder="Search for a film" v-on:input="$emit('textInput',$event)"/>
+  <input class="search" placeholder="Search for a film" v-on:input="search"/>
   <CustomFilter></CustomFilter>
 </div>
 </template>
@@ -9,7 +9,12 @@
 import CustomFilter from './CustomFilter.vue';
 export default {
   components: {CustomFilter},
-  name: "CustomSearch"
+  name: "CustomSearch",
+  methods: {
+    search: function(event){
+      this.$store.dispatch('fetchFilm', event.target.value);
+    }
+  }
 }
 </script>
 
@@ -25,7 +30,6 @@ flex-direction: column;
   font-size: 0.8em;
   border:none;
   color: white;
-  font-size: 1em;
   border-bottom: 1px solid white;
   background: black;
   letter-spacing: 1px;

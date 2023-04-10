@@ -1,22 +1,34 @@
+<template>
+  <div class="sliding" v-if="toggle">
+    <button class="left" v-on:click="scrollLeftButton"> &lt; </button>
+    <div class="scroll" ref="scroll" @mousedown="startDragging" @mousemove="dragging" @mouseup="stopDragging">
+      <div class="item-list">
+    <CustomCard class="results__card" v-for="film in films" v-bind:key="film.id" v-bind:title="film.title" v-bind:rating="film.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + film.poster_path" ></CustomCard>
+      </div>
+    </div>
+    <button class="right" v-on:click="scrollRight"> > </button>
+  </div>
+</template>
+
 <script>
-import CustomCard from "@/components/CustomCard.vue";
 import {mapState} from "vuex";
+import CustomCard from "@/components/CustomCard.vue";
 
 export default {
-  name: "CustomCarousel",
+  name: "CustomResults",
   components: {CustomCard},
+  computed: {
+    ...mapState(['films']),
+    toggle(){
+      return this.films.length > 0
+    }
+  },
   data() {
     return {
       isDragging: false,
       startX: null,
       scrollLeft: null
     }
-  },
-  computed:{
-    ...mapState(['trendings']),
-  },
-  mounted() {
-    this.$store.dispatch('fetchTrending')
   },
   methods: {
     scrollLeftButton() {
@@ -46,27 +58,12 @@ export default {
     },
     stopDragging() {
       this.isDragging = false;
-    },
+    }
   },
 }
 </script>
 
-<template>
-  <div class="sliding">
-    <button class="left" v-on:click="scrollLeftButton"> &lt; </button>
-    <div class="scroll" ref="scroll" @mousedown="startDragging" @mousemove="dragging" @mouseup="stopDragging">
-      <div class="item-list">
-        <CustomCard class="results__card" v-for="film in trendings" v-bind:title="film.title" v-bind:rating="film.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + film.poster_path"/>
-      </div>
-    </div>
-    <button class="right" v-on:click="scrollRight"> > </button>
-  </div>
-</template>
-
-
-
 <style scoped lang="scss">
-
 
 .sliding{
   align-items: center;
@@ -107,7 +104,7 @@ export default {
   cursor:pointer;
   font-size: 2em;
   font-weight: bold;
-  font-family: "Andale Mono",sans-serif;
+  font-family: "Andale Mono", sans-serif;
   height: 2em;
   width: 1.5em;
   border: 1px solid white;

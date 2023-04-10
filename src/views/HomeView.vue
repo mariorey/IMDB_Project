@@ -1,8 +1,9 @@
-<script setup lang="ts">
+<script setup>
 import { RouterView } from 'vue-router'
 import CustomSearch from '../components/CustomSearch.vue'
 import CustomCarousel from '../components/CustomCarousel.vue'
-import CustomFilter from '../components/CustomFilter.vue'
+import CustomResults from "@/components/CustomResults.vue";
+
 </script>
 
 <template>
@@ -11,6 +12,12 @@ import CustomFilter from '../components/CustomFilter.vue'
       <CustomSearch/>
     </div>
   <main class="container">
+    <Transition name="fade" @after-leave="showQuestion=4">
+    <div class="results" v-if="this.$store.state.films.length > 0">
+      <h2 class="results__title">RESULTS</h2>
+      <CustomResults></CustomResults>
+    </div>
+    </Transition>
     <div class="trending">
       <h2 class="trending__title">TRENDING</h2>
       <CustomCarousel></CustomCarousel>
@@ -57,6 +64,18 @@ import CustomFilter from '../components/CustomFilter.vue'
   }
 }
 
+.results{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  margin-top:3em;
+  &__title{
+    color:white;
+    font-size: 2em;
+    font-weight: bold;
+  }
+}
+
 :root {
   --font-fam: 'Lato', sans-serif;
   --height: 5rem;
@@ -73,6 +92,21 @@ import CustomFilter from '../components/CustomFilter.vue'
       max-width: 95%;
     }
   }
+  .results{
+    &__title{
+      font-size: 1.5em;
+      max-width: 95%;
+    }
+  }
 
+}
+.fade-enter-active, .fade-leave-active {
+  transition: 0.3s ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity:0;
+  transform: scale(0.3);
 }
 </style>
