@@ -26,6 +26,9 @@ export const store = createStore({
         setGenreFilter(state, genre){
             state.genreFilter = genre
         },
+        setYearFilter(state, year){
+            state.ageFilter = year
+        }
     },
     actions: {
         fetchFilm(state, query){

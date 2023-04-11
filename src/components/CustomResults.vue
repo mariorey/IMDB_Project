@@ -74,6 +74,7 @@ export default {
   width:90vw;
   max-width: 80vw;
   margin-top: 1em;
+  margin-bottom: 6em;
 }
 
 .scroll {

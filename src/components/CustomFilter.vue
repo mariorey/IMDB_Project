@@ -8,8 +8,8 @@
         <div class="range__container">
           <span>{{ yearDisplay[0] }}-</span>
           <span>{{ yearDisplay[1] }}</span>
-          <input type="range" min="1920" max="2023" step="1" v-model="yearDisplay[0]">
-          <input type="range" min="1920" max="2023" step="1" v-model="yearDisplay[1]">
+          <input type="range" min="1920" max="2023" step="1" v-model="yearDisplay[0]" @input="updateYearFilter">
+          <input type="range" min="1920" max="2023" step="1" v-model="yearDisplay[1]" @input="updateYearFilter">
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@ export default {
     return {
       showFilters: false,
       yearRange: 1,
-      yearDisplay: [1920, 2023],
+      yearDisplay: ["1920", "2023"],
       selectedGenre: '',
     };
   },
@@ -63,6 +63,9 @@ export default {
     resetGenre() {
       this.selectedGenre = '';
     },
+    updateYearFilter() {
+      this.$store.commit('setYearFilter', this.yearDisplay);
+    }
   }
 };
 </script>
@@ -213,7 +216,7 @@ input[type=range]::-webkit-slider-runnable-track {
 input[type=range]::-webkit-slider-thumb {
   z-index: 2;
   position: relative;
-  box-shadow: 0px 0px 0px #000;
+  box-shadow: 0 0 0 #000;
   border: 1px solid var(--pink-colour);
   height: 18px;
   width: 18px;
