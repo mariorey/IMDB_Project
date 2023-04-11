@@ -31,37 +31,33 @@ export const store = createStore({
         }
     },
     actions: {
-        /*
-        fetchFilm(state, query) {
+/*
+        async fetchFilm(state, query) {
             clearTimeout(this.searchTimer);
-            this.searchTimer = setTimeout(() => {
-                fetch('http://localhost:8080/search/terms?values=' + query + '&field=primaryTitle')
-                    .then(response => response.json())
-                    .then(data => {
-                        data = data.slice(0, 20)
-                        const fetchPromises = [];
-                        for (let film in data) {
-                            const fetchPromise = fetch('https://www.omdbapi.com/?apikey=85f7a0f9&t=' + data[film].primaryTitle)
-                                .then(response => response.json())
-                                .then(data2 => {
-                                    data[film].imageUrl = data2.Poster
-                                });
-
-                            fetchPromises.push(fetchPromise);
+            this.searchTimer = setTimeout(async () => {
+                try {
+                    const response = await fetch('http://localhost:8080/search/terms?values=' + query + '&field=primaryTitle');
+                    if (!response.ok) {
+                        throw new Error('Error al obtener datos');
+                    }
+                    const data = await response.json();
+                    const limitedData = data.slice(0, 20);
+                    for (let film of limitedData) {
+                        const response2 = await fetch('https://www.omdbapi.com/?apikey=85f7a0f9&t=' + film.originalTitle);
+                        if (!response2.ok) {
+                            throw new Error('Error al obtener datos');
                         }
-
-
-                        Promise.all(fetchPromises)
-                            .then(() => {
-                                this.commit('setFilms', data);
-                            })
-                            .catch(error => {
-                                console.error('Error en fetch: ', error);
-                            });
-                    });
-            }, 500);
+                        const data2 = await response2.json();
+                        film.imageUrl = data2.Poster;
+                    }
+                    this.commit('setFilms', limitedData);
+                } catch (error) {
+                    console.error(error);
+                }
+           }, 500);
         },
         */
+
         fetchFilm(state, query){
             clearTimeout(this.searchTimer);
             this.searchTimer = setTimeout(() => {
