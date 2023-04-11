@@ -3,7 +3,7 @@
     <button class="left" v-on:click="scrollLeftButton"> &lt; </button>
     <div class="scroll" ref="scroll" @mousedown="startDragging" @mousemove="dragging" @mouseup="stopDragging">
       <div class="item-list">
-    <CustomCard class="results__card" v-for="film in films" v-bind:key="film.id" v-bind:title="film.title" v-bind:rating="film.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + film.poster_path" ></CustomCard>
+        <CustomCard class="results__card" v-for="film in films" v-bind:key="film.id" v-bind:title="film.title" v-bind:rating="film.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + film.poster_path" ></CustomCard>
       </div>
     </div>
     <button class="right" v-on:click="scrollRight"> > </button>

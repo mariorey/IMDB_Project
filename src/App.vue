@@ -11,14 +11,14 @@
   </header>
   <RouterView />
   <footer class="footer">
-    <ul class="social-icon">
+    <div class="social-icon">
       <li class="social-icon__item"><a class="social-icon__link" href="https://www.github.com/mariorey">
         <ion-icon name="logo-github"></ion-icon>
       </a></li>
       <li class="social-icon__item"><a class="social-icon__link" href="https://www.linkedin.com/in/mario-rey-139b2a224/">
         <ion-icon name="logo-linkedin"></ion-icon>
       </a></li>
-    </ul>
+    </div>
     <p>&copy;2023 Mario Rey | All Rights Reserved</p>
   </footer>
 

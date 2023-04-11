@@ -31,6 +31,37 @@ export const store = createStore({
         }
     },
     actions: {
+        /*
+        fetchFilm(state, query) {
+            clearTimeout(this.searchTimer);
+            this.searchTimer = setTimeout(() => {
+                fetch('http://localhost:8080/search/terms?values=' + query + '&field=primaryTitle')
+                    .then(response => response.json())
+                    .then(data => {
+                        data = data.slice(0, 20)
+                        const fetchPromises = [];
+                        for (let film in data) {
+                            const fetchPromise = fetch('https://www.omdbapi.com/?apikey=85f7a0f9&t=' + data[film].primaryTitle)
+                                .then(response => response.json())
+                                .then(data2 => {
+                                    data[film].imageUrl = data2.Poster
+                                });
+
+                            fetchPromises.push(fetchPromise);
+                        }
+
+
+                        Promise.all(fetchPromises)
+                            .then(() => {
+                                this.commit('setFilms', data);
+                            })
+                            .catch(error => {
+                                console.error('Error en fetch: ', error);
+                            });
+                    });
+            }, 500);
+        },
+        */
         fetchFilm(state, query){
             clearTimeout(this.searchTimer);
             this.searchTimer = setTimeout(() => {
