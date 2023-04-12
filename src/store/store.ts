@@ -7,6 +7,7 @@ export const store = createStore({
         query: '',
         ageFilter: [],
         genreFilter: '',
+        discover: []
     },
     getters: {
         getFilms(state){
@@ -28,6 +29,9 @@ export const store = createStore({
         },
         setYearFilter(state, year){
             state.ageFilter = year
+        },
+        setDiscover(state, discover){
+            state.discover = discover
         }
     },
     actions: {
@@ -73,6 +77,14 @@ export const store = createStore({
                 .then(response => response.json())
                 .then(data => {
                     this.commit('setTrending', data.results);
+                });
+        },
+        fetchDiscover(state, list){
+            let genres = list[1] + ',' + ',' + list[3];
+            fetch('https://api.themoviedb.org/3/discover/movie?api_key=328ffe84a89f269e32f7d765b670b911&with_genres='+genres+'&with_runtime.lte='+list[2]+'&year='+list[0]+'&sort_by=popularity.desc')
+                .then(response => response.json())
+                .then(data => {
+                    this.commit('setDiscover', data.results[0]);
                 });
         }
     }

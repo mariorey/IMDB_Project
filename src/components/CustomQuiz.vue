@@ -3,7 +3,7 @@
     <h2 class="discover__question">{{ question }}</h2>
     <div class="options">
       <div v-for="(option, index) in options" :key="index" class="option">
-        <img class="option__image" :src="option.image" :alt="option.title" v-on:click="$emit('optionSelected', option.title)">
+        <img class="option__image" :src="option.image" :alt="option.title" v-on:click="$emit('optionSelected', option.value)">
         <p class="option__image--title">{{ option.title }}</p>
       </div>
     </div>
@@ -23,10 +23,10 @@ export default {
       required: true,
       validator: (options) => {
         return options.every((option) => {
-          return option.image && option.title;
+          return option.image && option.title && option.value
         });
       }
-    }
+    },
   }
 };
 </script>

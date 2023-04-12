@@ -2,53 +2,76 @@
   <div class="discover">
     <Transition name="fade" @after-leave="showQuestion=2">
       <CustomQuiz
-          question="¿Qué estilo de música prefieres?"
+          question="Are you an Old Schooler or you follow the latest trends?"
           :options="[
         {
-          image: 'https://cdn-profiles.tunein.com/s238570/images/logog.png?t=158749',
-          title: 'Reggaeton'
+          image: 'https://hips.hearstapps.com/hmg-prod/images/msdgowi-ec001-1551470524.jpg',
+          title: 'Old School',
+          value: '2000'
         },
         {
-          image: '../src/assets/classical.png',
-          title: 'Música clásica'
+          image: 'https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2022/07/marvels-avengers-2750719.jpg?tf=3840x',
+          title: 'Trend',
+          value: '2023'
         }
       ]" :onOptionSelected="selectOption"
           v-show="showQuestion==1"/>
     </Transition>
     <Transition name="fade" @after-leave="showQuestion=3">
       <CustomQuiz
-          question="¿Qué género te apetece más?"
+          question="What are you in the mood for?"
           :options="[
         {
           image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Comedy_film_icon.svg/1024px-Comedy_film_icon.svg.png',
-          title: 'COMEDIA'
+          title: 'Laugh my a** off',
+          value: '35'
         },
         {
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Drama-film-stub-icon.svg/768px-Drama-film-stub-icon.svg.png',
-          title: 'DRAMA'
+          image: 'https://images-prod.anothermag.com/779/azure/another-prod/410/6/416736.jpg',
+          title: 'Be frightened!',
+          value: '27'
         }
       ]" :onOptionSelected="selectOption"
           v-show="showQuestion==2"/>
     </Transition>
     <Transition name="fade" @after-leave="showQuestion=4">
       <CustomQuiz
-          question="¿Cuánto tiempo tienes?"
+          question="How much available time do you have?"
           :options="[
         {
           image: 'https://cdn-icons-png.flaticon.com/512/6520/6520467.png',
-          title: 'Menos de 2 horas'
+          title: 'Less than 2 hours',
+          value: '120'
         },
         {
           image: 'https://static.vecteezy.com/system/resources/previews/010/927/281/non_2x/two-hour-arrow-icon-on-white-background-2-hours-sign-timer-symbol-flat-style-vector.jpg',
-          title: 'Más de 2 horas'
+          title: 'More than 2 hours',
+          value: '300'
         }
       ]" :onOptionSelected="selectOption"
           v-show="showQuestion==3"/>
     </Transition>
-    <Transition name="fade">
-      <div class="card-wrapper" v-show="showQuestion==4">
-        <h2>Esta es la película recomendada para ti</h2>
-        <CustomCard rating="3.5" title="Cars" imageSrc="https://pics.filmaffinity.com/Cars-746710621-large.jpg" />
+    <Transition name="fade" @after-leave="showQuestion=5">
+        <CustomQuiz
+            question="How would you describe yourself?"
+            :options="[
+        {
+          image: 'https://images2.minutemediacdn.com/image/upload/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/shape/cover/sport/646987-jasin-boland-c-2012-warner-bros-entertainment-inc-54e2f8c553776eafbfd8ede11121a700.jpg',
+          title: 'I take action',
+          value: '28'
+        },
+        {
+          image: 'https://ugc.futurelearn.com/uploads/images/90/b7/90b74c5c-1783-4192-8ff1-d65ded09ca5f.jpg',
+          title: 'I am a observer',
+          value: '18'
+        }
+      ]" :onOptionSelected="selectOption"
+            v-show="showQuestion==4"/>
+      </Transition>
+      <Transition name="fade">
+      <div class="card-wrapper" v-show="showQuestion==5 && discover !== undefined">
+        <h2>This is what we have for you</h2>
+        <CustomCard v-if="discover" v-bind:title="discover.title" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + discover.poster_path"/>
       </div>
     </Transition>
   </div>
@@ -58,6 +81,7 @@
 import { defineComponent } from "vue";
 import CustomQuiz from "@/components/CustomQuiz.vue";
 import CustomCard from "@/components/CustomCard.vue";
+import {mapState} from "vuex";
 
 export default defineComponent({
   components: { CustomQuiz, CustomCard },
@@ -67,10 +91,16 @@ export default defineComponent({
       showQuestion: 1,
     };
   },
+  computed:{
+    ...mapState(['discover']),
+  },
   methods: {
-    selectOption(title) {
-      this.selectedOption.push(title);
+    selectOption(value) {
+      this.selectedOption.push(value);
       this.showQuestion = 0;
+      if(this.selectedOption.length == 4){
+        this.$store.dispatch('fetchDiscover', this.selectedOption);
+      }
     },
   },
 });
