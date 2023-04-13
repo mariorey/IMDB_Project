@@ -7,7 +7,8 @@ export const store = createStore({
         query: '',
         ageFilter: [],
         genreFilter: '',
-        discover: []
+        discover: [],
+        visibleDiscover: []
     },
     getters: {
         getFilms(state){
@@ -32,6 +33,20 @@ export const store = createStore({
         },
         setDiscover(state, discover){
             state.discover = discover
+        },
+        setVisibleDiscover(state, index=3){
+            if(index==3){
+                state.visibleDiscover = state.discover.slice(index-3, index)
+            }
+            else{
+                if(state.discover[index] !== undefined){
+                    state.visibleDiscover.push(state.discover[index-1], state.discover[index])
+                }
+            }
+        },
+        setSelectedFilm(state, index){
+            let film = state.visibleDiscover[index];
+            state.visibleDiscover = [film]
         }
     },
     actions: {
@@ -84,7 +99,8 @@ export const store = createStore({
             fetch('https://api.themoviedb.org/3/discover/movie?api_key=328ffe84a89f269e32f7d765b670b911&with_genres='+genres+'&with_runtime.lte='+list[2]+'&year='+list[0]+'&sort_by=popularity.desc')
                 .then(response => response.json())
                 .then(data => {
-                    this.commit('setDiscover', data.results[0]);
+                    this.commit('setDiscover', data.results);
+                    this.commit('setVisibleDiscover');
                 });
         }
     }

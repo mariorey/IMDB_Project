@@ -3,6 +3,7 @@ import { RouterView } from 'vue-router'
 import CustomSearch from '../components/CustomSearch.vue'
 import CustomCarousel from '../components/CustomCarousel.vue'
 import CustomResults from "@/components/CustomResults.vue";
+import CustomRoulette from "@/components/CustomRoulette.vue";
 
 </script>
 

@@ -69,9 +69,14 @@
             v-show="showQuestion==4"/>
       </Transition>
       <Transition name="fade">
-      <div class="card-wrapper" v-show="showQuestion==5 && discover !== undefined">
-        <h2>This is what we have for you</h2>
-        <CustomCard v-if="discover" v-bind:title="discover.title" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + discover.poster_path"/>
+      <div class="discovery-wrapper" v-show="showQuestion==5 && visibleDiscover !== undefined">
+        <h2 class="discovery-wrapper--title">This is what we have for you</h2>
+        <div class="card-wrapper">
+          <TransitionGroup name="insert"
+          >
+          <CustomCard class="card-wrapper__film" v-if="visibleDiscover" v-on:click="chooseFilm(index)" v-bind:key="film.id" v-for="(film, index) in visibleDiscover" v-bind:title="film.title" v-bind:rating="film.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + film.poster_path"/>
+          </TransitionGroup>
+        </div>
       </div>
     </Transition>
   </div>
@@ -89,10 +94,11 @@ export default defineComponent({
     return {
       selectedOption:[] ,
       showQuestion: 1,
+      discoverIndex: 3,
     };
   },
   computed:{
-    ...mapState(['discover']),
+    ...mapState(['visibleDiscover']),
   },
   methods: {
     selectOption(value) {
@@ -102,6 +108,11 @@ export default defineComponent({
         this.$store.dispatch('fetchDiscover', this.selectedOption);
       }
     },
+    chooseFilm(index) {
+     this.$store.commit('setSelectedFilm', index);
+     this.discoverIndex+=2
+     this.$store.commit('setVisibleDiscover', this.discoverIndex);
+      }
   },
 });
 </script>
@@ -143,15 +154,53 @@ export default defineComponent({
     }
   }
 }
-.card-wrapper {
+.discovery-wrapper {
   display: flex;
-  color: lightgrey;
-  font-family: Roboto, sans-serif;
   flex-direction: column;
   justify-content: center;
-  max-width: 264px;
+  align-items: center;
+  max-width: 822px;
+  &--title{
+    font-family: Roboto, sans-serif;
+    color: lightgrey;
+    font-size: 2.3rem;
+    margin-bottom: 1.2rem;
+  }
 }
 
+.card-wrapper{
+  display:flex;
+  flex-direction: row;
+  gap:10px;
+  &__film:hover{
+      max-height: 10000px;
+     max-width: 10000px;
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+
+  }
+}
+
+.insert{
+  &-enter, &-leave-to{
+    opacity: 0;
+  }
+  &-enter{
+    transform: translateX(-50vw);
+  }
+  &-leave-to{
+    transform: translateX(50vw);
+  }
+  &-enter-active{
+    transition: opacity .6s linear, transform 1s cubic-bezier(.68,-0.12,0,1.18);
+  }
+  &-leave-active{
+    transition: opacity .6s linear, transform 1s cubic-bezier(.68,-0.12,0,1.18);
+  }
+  &-move{
+    transition: all .5s ease-in-out;
+  }
+}
 
 .fade-enter-active, .fade-leave-active {
 transition: 0.3s ease-out;
@@ -196,6 +245,9 @@ transition: 0.3s ease-out;
     font-size: 2rem;
     font-weight: bold;
     color: lightgrey;
+  }
+  .card-wrapper{
+    flex-direction: column;
   }
 }
 </style>
