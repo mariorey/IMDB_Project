@@ -1,171 +1,147 @@
 <template>
-  <!-- Circle graphic -->
-  <div id="container1" class="container1">
-    <div id="wheel" class="wheel">
-      <div>
-        <span class="span1"><p>😊</p></span>
-        <span class="span2"><p>😝</p></span>
-        <span class="span3"><p>😍</p></span>
-        <span class="span4"><p>😎</p></span>
-
-        <span class="span5"><p>🍩</p></span>
-        <span class="span6"><p>🍭</p></span>
-        <span class="span7"><p>🍰</p></span>
-        <span class="span8"><p>🍬</p></span>
-      </div>
+  <span class="arrow">⇩</span>
+  <div class="wheel__container">
+    <button id="spin" v-on:click="spin">Spin</button>
+    <div class="container">
+      <div class="one"><img v-if="options[0]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[0]?.poster_path"> </div>
+      <div class="two"><img v-if="options[1]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[1]?.poster_path"></div>
+      <div class="three"><img v-if="options[2]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[2]?.poster_path"></div>
+      <div class="four"><img v-if="options[3]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[3]?.poster_path"></div>
+      <div class="five"><img v-if="options[4]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[4]?.poster_path"></div>
+      <div class="six"><img v-if="options[5]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[5]?.poster_path"></div>
+      <div class="seven"><img v-if="options[6]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[6]?.poster_path"></div>
+      <div class="eight"><img v-if="options[7]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[7]?.poster_path"></div>
     </div>
-
-    <button class="spin" onclick="letsSpin()">SPIN</button>
   </div>
+
 </template>
 
 <script>
+
 export default {
-  data() {
-    return {
-      items: ['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4', 'Opción 5'], // Ejemplo de ítems de muestra
-      selected: null, // El ítem seleccionado automáticamente
-    };
+  name: "CustomRoulette",
+  props: {
+    options: {
+      type: Array,
+      default: []
+    },
   },
   methods: {
-    spin() {
-      // Lógica para girar la ruleta y seleccionar un ítem automáticamente
-      // Puedes implementar esta lógica según tus necesidades específicas
-      // Aquí hay un ejemplo básico para seleccionar un ítem al azar:
-      const randomIndex = Math.floor(Math.random() * this.items.length);
-      this.selected = this.items[randomIndex];
+    spin(){
+      let number = Math.ceil(Math.random() * 10000);
+      let container = document.querySelector(".container");
+      container.style.transform = "rotate(" + number + "deg)";
+      number += Math.ceil(Math.random() * 10000);
     },
-    letsSpin() {
-
-  var x = 1024; //min value
-  var y = 9999; //max value
-
-  var deg = Math.floor(Math.random() * (x - y)) + y;
-
-  document.getElementById('container1').style.transform = "rotate("+deg+"deg)";
-
   }
-  },
-};
+}
 </script>
 
-<style scoped lang="css">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
+<style>
+*{
+  box-sizing:border-box;
 }
 
-.container1 {
-  position: relative;
-  width: 500px;
-  height: 500px;
+.wheel__container{
+  margin:0;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  overflow:hidden;
 }
-.wheel {
-  width: 100%;
-  height: 100%;
+
+.container{
+  width:500px;
+  height:500px;
+  background-color: #ccc;
+  border-radius:50%;
+  border:15px solid #dde;
   position: relative;
-  border-radius: 50%;
-  border: 10px solid #fff;
   overflow: hidden;
-  transition: all ease 4s;
+  transition: 5s;
 }
-span {
-  width: 50%;
-  height: 50%;
-  display: inline-block;
+
+.container div{
+  height:50%;
+  width:200px;
   position: absolute;
+  clip-path: polygon(100% 0 , 50% 100% , 0 0 );
+  transform:translateX(-50%);
+  transform-origin:bottom;
+  text-align:center;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-size:20px;
+  font-weight:bold;
+  font-family:sans-serif;
+  color:#fff;
+  left:135px;
 }
-.span1 {
-  clip-path: polygon(0 92%, 100% 50%, 0 8%);
-  background-color: #ff1f1f;
-  top: 120px;
-  left: 0;
+
+.container .one{
+  background-color: #3f51b5;
+  left:50%;
 }
-.span2 {
-  clip-path: polygon(100% 92%, 0 50%, 100% 8%);
-  background-color: #19e3cf;
-  top: 120px;
-  right: 0;
+.container .two{
+  background-color: #ff9800;
+  transform: rotate(45deg);
 }
-.span3 {
-  clip-path: polygon(50% 0%, 8% 100%, 92% 100%);
-  background-color: #9e0bf3;
-  bottom: 0;
-  left: 120px;
+.container .three{
+  background-color: #e91e63;
+  transform:rotate(90deg);
 }
-.span4 {
-  clip-path: polygon(50% 100%, 92% 0, 8% 0);
-  background-color: #15b600;
-  top: 0;
-  left: 120px;
+.container .four{
+  background-color: #4caf50;
+  transform: rotate(135deg);
 }
-.span5 {
-  clip-path: polygon(0 40%, 100% 0%, 60% 100%);
-  background-color: #1f26ff;
-  bottom: -2px;
-  right: 242px;
+.container .five{
+  background-color: #009688;
+  transform: rotate(180deg);
 }
-.span6 {
-  clip-path: polygon(40% 100%, 0 0%, 100% 40%);
-  background-color: #ff5a5a;
-  bottom: -2px;
-  left: 242px;
+.container .six{
+  background-color: #795548;
+  transform: rotate(225deg);
 }
-.span7 {
-  clip-path: polygon(60% 0, 100% 100%, 0 60%);
-  background-color: #57fff1;
-  top: -2px;
-  right: 242px;
+.container .seven{
+  background-color: #9c27b0;
+  transform: rotate(270deg);
 }
-.span8 {
-  clip-path: polygon(0 100%, 100% 60%, 40% 0);
-  background-color: #ff9612;
-  top: -2px;
-  left: 242px;
+.container .eight{
+  background-color: #f44336;
+  transform: rotate(315deg);
 }
-span p{
-  width: 65px;
-  height: 65px;
-  font-size: 60px;
-  text-align: center;
+
+.arrow{
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-size: 3em;
+  top:-70px;
+  left:50%;
+  transform: translateX(-50%);
+  color:#fff;
 }
-.spin {
+
+#spin{
   position: absolute;
-  top: 43%;
-  left: 43%;
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  background-color: black;
-  color: #fff;
-  box-shadow: 0 5px 20px #000;
-  font-weight: bold;
-  font-size: 22px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:10;
+  background-color: #e2e2e2;
+  text-transform: uppercase;
+  border:8px solid #fff;
+  font-weight:bold;
+  font-size:20px;
+  color:#a2a2a2;
+  width: 80px;
+  height:80px;
+  font-family: sans-serif;
+  border-radius:50%;
   cursor: pointer;
-  animation: pulse 2s infinite;
+  outline:none;
+  letter-spacing: 1px;
+  
 }
-@keyframes pulse {
-  0% {
-    transform: scale3d(1, 1, 1);
-  }
-  50% {
-    transform: scale3d(1.09, 1.09, 1.09);
-  }
-  100% {
-    transform: scale3d(1, 1, 1);
-  }
-}
-.spin:active {
-  width: 70px;
-  height: 70px;
-  font-size: 20px;
-  background: #ffe605;
-}
+
 </style>

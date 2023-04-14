@@ -72,8 +72,7 @@
       <div class="discovery-wrapper" v-show="showQuestion==5 && visibleDiscover !== undefined">
         <h2 class="discovery-wrapper--title">This is what we have for you</h2>
         <div class="card-wrapper">
-          <TransitionGroup name="insert"
-          >
+          <TransitionGroup name="insert">
           <CustomCard class="card-wrapper__film" v-if="visibleDiscover" v-on:click="chooseFilm(index)" v-bind:key="film.id" v-for="(film, index) in visibleDiscover" v-bind:title="film.title" v-bind:rating="film.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + film.poster_path"/>
           </TransitionGroup>
         </div>

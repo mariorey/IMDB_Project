@@ -1,150 +1,74 @@
 <template>
-  <div id="main" class="main">
-    <div id="wheel" class="wheel">
-      <div>
-        <span class="span1"><p>😊</p></span>
-        <span class="span2"><p>😝</p></span>
-        <span class="span3"><p>😍</p></span>
-        <span class="span4"><p>😎</p></span>
-
-        <span class="span5"><p>🍩</p></span>
-        <span class="span6"><p>🍭</p></span>
-        <span class="span7"><p>🍰</p></span>
-        <span class="span8"><p>🍬</p></span>
-      </div>
-    </div>
-
-    <button class="spin" onclick="letsSpin()">SPIN</button>
+  <span class="title"> GENRE </span>
+  <div class="filters__genre">
+    <button class="filters__genre--option" :class="{ active: selectedGenres.includes('28') }" v-on:click="selectGenre('28')">ACTION</button>
+    <button class="filters__genre--option" :class="{ active: selectedGenres.includes('27') }" v-on:click="selectGenre('27')">HORROR</button>
+    <button class="filters__genre--option" :class="{ active: selectedGenres.includes('35') }" v-on:click="selectGenre('35')">COMEDY</button>
+    <button class="filters__genre--option" :class="{ active: selectedGenres.includes('14') }" v-on:click="selectGenre('14')">FANTASY</button>
+    <button class="filters__genre--option" :class="{ active: selectedGenres.includes('10749') }" v-on:click="selectGenre('10749')">ROMANTIC</button>
   </div>
+  <CustomRoulette v-bind:options="rouletteFilms"></CustomRoulette>
 </template>
 
 <script>
 
+import CustomRoulette from "@/components/CustomRoulette.vue";
+import {mapState} from "vuex";
+
 export default {
   name: "RouletteView",
+  components: {CustomRoulette},
+  data() {
+    return {
+      selectedGenres: [],
+    }
+  },
+  computed: {
+    ...mapState(['rouletteFilms'])
+  },
+  methods:{
+    selectGenre(genre) {
+      if (this.selectedGenres.includes(genre)) {
+        this.selectedGenres.splice(this.selectedGenres.indexOf(genre), 1);
+        this.$store.commit('setGenresRoulette', this.selectedGenres);
+        this.$store.dispatch('fetchRoulette', this.selectedGenres);
+      } else {
+        this.selectedGenres.push(genre);
+        this.$store.commit('setGenresRoulette', this.selectedGenres);
+        this.$store.dispatch('fetchRoulette', this.selectedGenres);
+      }
+
+    },
+  }
 }
 </script>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
-}
+<style lang="scss">
+.title{
+  font-size: 1.5em;
+  color: lightgrey;
 
-
-.main {
-  position: relative;
-  width: 500px;
-  height: 500px;
 }
-.wheel {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  border-radius: 50%;
-  border: 10px solid #fff;
-  overflow: hidden;
-  transition: all ease 4s;
+.filters__genre{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap:1em;
+  font-size: 1.5em;
+  color: lightgrey;
+&--option{
+   margin-top: 1em;
+   background-color: #f44336;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   padding: 10px;
+   font-size: 16px;
+   width: 100px;
+   cursor: pointer;
+ }
 }
-span {
-  width: 50%;
-  height: 50%;
-  display: inline-block;
-  position: absolute;
+.filters__genre--option.active {
+  background-color: rgba(255, 0, 0, 0.5);
 }
-.span1 {
-  clip-path: polygon(0 92%, 100% 50%, 0 8%);
-  background-color: #ff1f1f;
-  top: 120px;
-  left: 0;
-}
-.span2 {
-  clip-path: polygon(100% 92%, 0 50%, 100% 8%);
-  background-color: #19e3cf;
-  top: 120px;
-  right: 0;
-}
-.span3 {
-  clip-path: polygon(50% 0%, 8% 100%, 92% 100%);
-  background-color: #9e0bf3;
-  bottom: 0;
-  left: 120px;
-}
-.span4 {
-  clip-path: polygon(50% 100%, 92% 0, 8% 0);
-  background-color: #15b600;
-  top: 0;
-  left: 120px;
-}
-.span5 {
-  clip-path: polygon(0 40%, 100% 0%, 60% 100%);
-  background-color: #1f26ff;
-  bottom: -2px;
-  right: 242px;
-}
-.span6 {
-  clip-path: polygon(40% 100%, 0 0%, 100% 40%);
-  background-color: #ff5a5a;
-  bottom: -2px;
-  left: 242px;
-}
-.span7 {
-  clip-path: polygon(60% 0, 100% 100%, 0 60%);
-  background-color: #57fff1;
-  top: -2px;
-  right: 242px;
-}
-.span8 {
-  clip-path: polygon(0 100%, 100% 60%, 40% 0);
-  background-color: #ff9612;
-  top: -2px;
-  left: 242px;
-}
-span p{
-  width: 65px;
-  height: 65px;
-  font-size: 60px;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.spin {
-  position: absolute;
-  top: 43%;
-  left: 43%;
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  background-color: black;
-  color: #fff;
-  box-shadow: 0 5px 20px #000;
-  font-weight: bold;
-  font-size: 22px;
-  cursor: pointer;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0% {
-    transform: scale3d(1, 1, 1);
-  }
-  50% {
-    transform: scale3d(1.09, 1.09, 1.09);
-  }
-  100% {
-    transform: scale3d(1, 1, 1);
-  }
-}
-.spin:active {
-  width: 70px;
-  height: 70px;
-  font-size: 20px;
-  background: #ffe605;
-}
-
-
 </style>

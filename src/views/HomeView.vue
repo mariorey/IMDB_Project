@@ -3,7 +3,6 @@ import { RouterView } from 'vue-router'
 import CustomSearch from '../components/CustomSearch.vue'
 import CustomCarousel from '../components/CustomCarousel.vue'
 import CustomResults from "@/components/CustomResults.vue";
-import CustomRoulette from "@/components/CustomRoulette.vue";
 
 </script>
 
@@ -13,7 +12,7 @@ import CustomRoulette from "@/components/CustomRoulette.vue";
       <CustomSearch/>
     </div>
   <main class="container">
-    <Transition name="fade" @after-leave="showQuestion=4">
+    <Transition name="fade">
     <div class="results" v-if="this.$store.state.films.length > 0">
       <h2 class="results__title">RESULTS</h2>
       <CustomResults></CustomResults>
