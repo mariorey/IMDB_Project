@@ -26,12 +26,28 @@ export default {
       default: []
     },
   },
+  data() {
+    return {
+      optionIndex : 0,
+      times: 0
+    }
+  },
   methods: {
-    spin(){
-      let number = Math.ceil(Math.random() * 10000);
+    spin() {
+      this.times+=1;
+      let prevOptionIndex = this.optionIndex;
+      do {
+        this.optionIndex = Math.floor(Math.random() * 8);
+      } while (this.optionIndex === prevOptionIndex);
+
+      let rotationAngle = (this.times * 360 * 10) - (45 * this.optionIndex);
+
       let container = document.querySelector(".container");
-      container.style.transform = "rotate(" + number + "deg)";
-      number += Math.ceil(Math.random() * 10000);
+      container.style.transform = "rotate(" + rotationAngle + "deg)";
+      setTimeout(() => {
+        this.$emit('spin-complete', this.options[this.optionIndex])
+      }, 5000)
+
     },
   }
 }
@@ -116,7 +132,7 @@ export default {
 .arrow{
   position: absolute;
   font-size: 3em;
-  top:-70px;
+  top:90px;
   left:50%;
   transform: translateX(-50%);
   color:#fff;
