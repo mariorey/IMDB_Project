@@ -1,6 +1,7 @@
 <template>
-  <span class="title"> GENRE </span>
-  <div class="wrapper">
+
+  <div class="filters__wrapper">
+    <span class="title"> GENRE </span>
     <div class="filters__genre">
       <button class="filters__genre--option" :class="{ active: selectedGenres.includes('28') }" v-on:click="selectGenre('28')">ACTION</button>
       <button class="filters__genre--option" :class="{ active: selectedGenres.includes('27') }" v-on:click="selectGenre('27')">HORROR</button>
@@ -8,13 +9,16 @@
       <button class="filters__genre--option" :class="{ active: selectedGenres.includes('14') }" v-on:click="selectGenre('14')">FANTASY</button>
       <button class="filters__genre--option" :class="{ active: selectedGenres.includes('10749') }" v-on:click="selectGenre('10749')">ROMANTIC</button>
     </div>
-    <CustomRoulette v-bind:options="rouletteFilms" v-on:spin-complete="onSpinComplete"></CustomRoulette>
+
   </div>
+  <div class="wrapperResults">
+  <CustomRoulette v-bind:options="rouletteFilms" v-on:spin-complete="onSpinComplete"></CustomRoulette>
   <div class="film__results">
     <span class="title"> RESULTS </span>
   <Transition name="fade">
   <CustomCard class="results__card" v-if="selectedFilm" v-bind:title="selectedFilm.title" v-bind:rating="selectedFilm.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + selectedFilm.poster_path"/>
   </Transition>
+  </div>
   </div>
 </template>
 
@@ -23,10 +27,11 @@
 import CustomRoulette from "@/components/CustomRoulette.vue";
 import {mapState} from "vuex";
 import CustomCard from "@/components/CustomCard.vue";
+import CardPopup from "@/components/CardPopup.vue";
 
 export default {
   name: "RouletteView",
-  components: {CustomCard, CustomRoulette},
+  components: {CustomCard, CustomRoulette, CardPopup},
   data() {
     return {
       selectedGenres: [],
@@ -59,10 +64,19 @@ export default {
 </script>
 
 <style lang="scss">
-.wrapper{
+.filters__wrapper{
   display:flex;
   flex-direction: column;
+  width: 100vw;
+  align-items: center;
+}
+
+.wrapperResults{
+  display:flex;
+  flex-direction: row;
   gap: 3em;
+  justify-content: center;
+  margin-top: 3em;
 }
 
 .title{
@@ -94,7 +108,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  width: 100vw;
+  width: 40vw;
   align-items: center;
 }
 .results__card{
@@ -114,5 +128,23 @@ export default {
 
 .filters__genre--option.active {
   background-color: rgba(255, 0, 0, 0.5);
+}
+
+@media (max-width: 1024px) {
+  .wrapperResults{
+    flex-direction: column;
+    align-items: center;
+  }
+  .film__results{
+    width: 100%;
+  }
+  .title{
+    text-align:center;
+  }
+  .filters__genre{
+    max-width: 100vw;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 </style>

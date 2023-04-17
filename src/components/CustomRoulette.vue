@@ -1,8 +1,10 @@
 <template>
   <span class="arrow">⇩</span>
   <div class="wheel__container">
-    <button id="spin" v-on:click="spin">Spin</button>
-    <div class="container">
+    <div class="button__container">
+    <button id="spin" class="spin" v-on:click="spin">Spin</button>
+    </div>
+    <div class="options__container">
       <div class="one"><img v-if="options[0]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[0]?.poster_path"> </div>
       <div class="two"><img v-if="options[1]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[1]?.poster_path"></div>
       <div class="three"><img v-if="options[2]?.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500' + options[2]?.poster_path"></div>
@@ -42,7 +44,7 @@ export default {
 
       let rotationAngle = (this.times * 360 * 10) - (45 * this.optionIndex);
 
-      let container = document.querySelector(".container");
+      let container = document.querySelector(".options__container");
       container.style.transform = "rotate(" + rotationAngle + "deg)";
       setTimeout(() => {
         this.$emit('spin-complete', this.options[this.optionIndex])
@@ -53,21 +55,28 @@ export default {
 }
 </script>
 
-<style>
-*{
-  box-sizing:border-box;
-}
+<style lang="scss">
 
 .wheel__container{
   margin:0;
   padding:0;
-  display:flex;
-  align-items:center;
-  justify-content: center;
+  display:grid;
+  width: fit-content;
+  justify-items: center;
+  align-items: center;
+  margin-top:2em;
   overflow:hidden;
 }
 
-.container{
+.button__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index:2;
+  transform: translate(-50%, -50%);
+}
+
+.options__container{
   width:500px;
   height:500px;
   background-color: #ccc;
@@ -78,7 +87,7 @@ export default {
   transition: 5s;
 }
 
-.container div{
+.options__container div{
   height:50%;
   width:200px;
   position: absolute;
@@ -94,37 +103,40 @@ export default {
   font-family:sans-serif;
   color:#fff;
   left:135px;
+  & img{
+  width:200px;
+    }
 }
 
-.container .one{
+.options__container .one{
   background-color: #3f51b5;
   left:50%;
 }
-.container .two{
+.options__container .two{
   background-color: #ff9800;
   transform: rotate(45deg);
 }
-.container .three{
+.options__container .three{
   background-color: #e91e63;
   transform:rotate(90deg);
 }
-.container .four{
+.options__container .four{
   background-color: #4caf50;
   transform: rotate(135deg);
 }
-.container .five{
+.options__container .five{
   background-color: #009688;
   transform: rotate(180deg);
 }
-.container .six{
+.options__container .six{
   background-color: #795548;
   transform: rotate(225deg);
 }
-.container .seven{
+.options__container .seven{
   background-color: #9c27b0;
   transform: rotate(270deg);
 }
-.container .eight{
+.options__container .eight{
   background-color: #f44336;
   transform: rotate(315deg);
 }
@@ -132,17 +144,14 @@ export default {
 .arrow{
   position: absolute;
   font-size: 3em;
-  top:90px;
-  left:50%;
+  top:-30px;
+  left:28.6%;
   transform: translateX(-50%);
   color:#fff;
 }
 
-#spin{
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
+.spin{
+  position: relative;
   z-index:10;
   background-color: #e2e2e2;
   text-transform: uppercase;
@@ -157,7 +166,37 @@ export default {
   cursor: pointer;
   outline:none;
   letter-spacing: 1px;
-  
+  animation: pulse 2s infinite;
+}
+
+@media (max-width: 1024px) {
+.arrow{
+  left:50%;
+}
+  .options__container{
+    width:350px;
+    height:350px;
+  }
+  .options__container div{
+    width:150px;
+    left:85px;
+    & img{
+      width:150px;
+    }
+  }
+
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    transform: scale3d(1.09, 1.09, 1.09);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
 }
 
 </style>

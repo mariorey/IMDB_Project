@@ -1,5 +1,4 @@
 <script setup>
-import { RouterView } from 'vue-router'
 import CustomSearch from '../components/CustomSearch.vue'
 import CustomCarousel from '../components/CustomCarousel.vue'
 import CustomResults from "@/components/CustomResults.vue";
@@ -7,7 +6,6 @@ import CustomResults from "@/components/CustomResults.vue";
 </script>
 
 <template>
-
     <div class="search">
       <CustomSearch/>
     </div>
@@ -23,8 +21,6 @@ import CustomResults from "@/components/CustomResults.vue";
       <CustomCarousel></CustomCarousel>
     </div>
   </main>
-
-  <RouterView />
 </template>
 
 <style scoped lang="scss">
@@ -77,11 +73,6 @@ import CustomResults from "@/components/CustomResults.vue";
   }
 }
 
-:root {
-  --font-fam: 'Lato', sans-serif;
-  --height: 5rem;
-  --bez: cubic-bezier(0, 0, 0.43, 1.49);
-}
 
 
 
