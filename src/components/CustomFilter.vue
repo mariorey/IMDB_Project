@@ -1,7 +1,7 @@
 <template>
   <button class="filter-button" v-on:click="toggleFilters">FILTERS</button>
   <div class="filters" :class="{ 'show-filters': showFilters }">
-    <button class=filters--close v-on:click="hideFilters" >X</button>
+    <button class="filters--close" v-on:click="hideFilters" >X</button>
     <div class="filters__year">
       <div class="filters__year">
         <span> YEAR </span>

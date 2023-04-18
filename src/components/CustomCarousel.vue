@@ -1,10 +1,11 @@
 <script>
 import CustomCard from "@/components/CustomCard.vue";
+import CardPopup from "@/components/CardPopup.vue";
 import {mapState} from "vuex";
 
 export default {
   name: "CustomCarousel",
-  components: {CustomCard},
+  components: {CustomCard, CardPopup},
   data() {
     return {
       isDragging: false,
@@ -56,7 +57,7 @@ export default {
     <button class="left" v-on:click="scrollLeftButton"> &lt; </button>
     <div class="scroll" ref="scroll" @mousedown="startDragging" @mousemove="dragging" @mouseup="stopDragging">
       <div class="item-list">
-        <CustomCard class="results__card" v-for="film in trendings" v-bind:title="film.title" v-bind:rating="film.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + film.poster_path"/>
+        <CardPopup class="results__card" v-for="film in trendings" v-bind:film="film"/>
       </div>
     </div>
     <button class="right" v-on:click="scrollRight"> > </button>
@@ -101,7 +102,7 @@ export default {
 
 .right {
   position: absolute;
-  right: -10px;
+  right: -20px;
   background: rgba(0, 0, 0, 0.5);
   color: white;
   cursor:pointer;
@@ -119,7 +120,7 @@ export default {
 
 .left {
   position: absolute;
-  left: -10px;
+  left: -20px;
   cursor:pointer;
   z-index:1;
   background: rgba(0, 0, 0, 0.5);

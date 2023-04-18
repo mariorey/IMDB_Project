@@ -16,7 +16,7 @@
   <div class="film__results">
     <span class="title"> RESULTS </span>
   <Transition name="fade">
-  <CustomCard class="results__card" v-if="selectedFilm" v-bind:title="selectedFilm.title" v-bind:rating="selectedFilm.vote_average.toString()" v-bind:image-src="'https://image.tmdb.org/t/p/w500' + selectedFilm.poster_path"/>
+  <CardPopup class="results__card" v-if="selectedFilm" v-bind:film="selectedFilm"/>
   </Transition>
   </div>
   </div>
@@ -57,6 +57,7 @@ export default {
     onSpinComplete(film) {
 
         this.selectedFilm = film;
+        console.log(film)
 
     }
   }
