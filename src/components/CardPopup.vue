@@ -174,6 +174,10 @@ export default {
       height: 388px;
     }
   }
+  .popup{
+    width:100vw;
+    height:50vh;
+  }
 }
 
 

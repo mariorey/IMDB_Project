@@ -2,6 +2,7 @@
   <div class="wrapper">
     <RouterLink class="wrapper--home" to="/">HOME</RouterLink>
     <RouterLink class="wrapper--discover" to="/discover">DISCOVER</RouterLink>
+    <RouterLink class="wrapper--roulette" to="/roulette">RANDOM</RouterLink>
   </div>
 </template>
 
@@ -21,10 +22,15 @@ export default {
     color:#E50914;
     color-border-hover:#E50914;
     margin-right: 1em;
-    margin-left: 3em;
+    margin-left: 1em;
 
   }
   &--discover{
+    color:#E50914;
+    margin-right: 1em;
+
+  }
+  &--roulette{
     color:#E50914;
     margin-right: 2em;
 
