@@ -22,7 +22,7 @@
           question="What are you in the mood for?"
           :options="[
         {
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Comedy_film_icon.svg/1024px-Comedy_film_icon.svg.png',
+          image: 'https://www.shutterstock.com/shutterstock/videos/1014864658/thumb/3.jpg?ip=x480',
           title: 'Laugh my a** off',
           value: '35'
         },
@@ -39,12 +39,12 @@
           question="How much available time do you have?"
           :options="[
         {
-          image: 'https://cdn-icons-png.flaticon.com/512/6520/6520467.png',
+          image: '../src/assets/onehours.png',
           title: 'Less than 2 hours',
           value: '120'
         },
         {
-          image: 'https://static.vecteezy.com/system/resources/previews/010/927/281/non_2x/two-hour-arrow-icon-on-white-background-2-hours-sign-timer-symbol-flat-style-vector.jpg',
+          image: '../src/assets/twohours.png',
           title: 'More than 2 hours',
           value: '300'
         }
@@ -176,6 +176,7 @@ export default defineComponent({
      max-width: 10000px;
     transform: scale(1.1);
     transition: all 0.5s ease;
+    z-index:10;
 
   }
 }
@@ -214,10 +215,11 @@ transition: 0.3s ease-out;
 
 @media (max-width: 1023px) {
   .discover {
-    padding: 2rem;
+    padding: 0.5rem;
   }
   .discover__question {
-    font-size: 2rem;
+    font-size: 1.2rem;
+    text-align: center;
     margin-bottom: 1rem;
     color: lightgrey;
   }
@@ -233,9 +235,8 @@ transition: 0.3s ease-out;
     margin-bottom: 2rem;
   }
   .option__image {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
+    width: 200px;
+    height:200px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 1rem;
@@ -247,6 +248,10 @@ transition: 0.3s ease-out;
   }
   .card-wrapper{
     flex-direction: column;
+  }
+  .discovery-wrapper--title{
+    font-size:1.4rem;
+    text-align: center;
   }
 }
 </style>

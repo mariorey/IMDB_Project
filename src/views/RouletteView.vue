@@ -55,7 +55,8 @@ export default {
 
     },
     onSpinComplete(film) {
-
+      film.title.length > 17 ? film.shortTitle = film.title.substring(0, 18) + '...' :
+          film.shortTitle = film.title;
         this.selectedFilm = film;
         console.log(film)
 
@@ -68,7 +69,8 @@ export default {
 .filters__wrapper{
   display:flex;
   flex-direction: column;
-  width: 100vw;
+  width: 90vw;
+  margin-left:4vw;
   align-items: center;
 }
 
@@ -81,7 +83,8 @@ export default {
 }
 
 .title{
-  font-size: 1.5em;
+  font-size: 2em;
+  font-weight: bold;
   color: lightgrey;
 
 }

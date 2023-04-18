@@ -109,35 +109,35 @@ export default {
 }
 
 .options__container .one{
-  background-color: #3f51b5;
+  background-color: #f94144;
   left:50%;
 }
 .options__container .two{
-  background-color: #ff9800;
+  background-color: #f3722c;
   transform: rotate(45deg);
 }
 .options__container .three{
-  background-color: #e91e63;
+  background-color: #f8961e;
   transform:rotate(90deg);
 }
 .options__container .four{
-  background-color: #4caf50;
+  background-color: #f9c74f;
   transform: rotate(135deg);
 }
 .options__container .five{
-  background-color: #009688;
+  background-color: #90be6d;
   transform: rotate(180deg);
 }
 .options__container .six{
-  background-color: #795548;
+  background-color: #43aa8b;
   transform: rotate(225deg);
 }
 .options__container .seven{
-  background-color: #9c27b0;
+  background-color: #577590 ;
   transform: rotate(270deg);
 }
 .options__container .eight{
-  background-color: #f44336;
+  background-color: #ff6961;
   transform: rotate(315deg);
 }
 

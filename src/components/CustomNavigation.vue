@@ -55,6 +55,9 @@ a {
   .navigation--home{
     margin-right: 1em;
   }
+  .wrapper--roulette{
+    margin-right:0;
+  }
 
 }
 </style>

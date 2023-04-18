@@ -1,18 +1,21 @@
 <template>
 
-  <article class="film" @click="showPopupDialog">
-    <img class="film__image" v-bind:alt="'Film image of' + film.title" v-bind:src="'https://image.tmdb.org/t/p/w500' + film.poster_path"/>
+  <article class="film">
+    <div class="img__wrapper">
+      <img class="film__image" v-bind:alt="'Film image of' + film.title" v-bind:src="'https://image.tmdb.org/t/p/w500' + film.poster_path"/>
+    </div>
     <div class="film__description">
-      <span class="film__description--title">{{ film.title }}</span>
+      <span class="film__description--title">{{ film.shortTitle }}</span>
       <span class="film__description--rating">{{ film.vote_average.toString() }}<img src="../assets/star.png" alt="rating" style="height:1em;"></span>
     </div>
+    <img src="../assets/info.png" class="film__info" @click="showPopupDialog">
   </article>
   <Transition name="fade">
   <div class="popup" v-if="showPopup">
     <div class="popup__header">
     <img class="film__image" v-bind:alt="'Film image of' + film.title" v-bind:src="'https://image.tmdb.org/t/p/w500' + film.poster_path"/>
     <div class="popup__content">
-      <h3>{{ film.title }}</h3>
+      <h3 class="popup__content--title">{{ film.title }}</h3>
       <span class="popup__voting">{{ film.vote_average.toString() }}<img src="../assets/star.png" alt="rating" style="margin:0;height:1.2em;width:1.2em;">
         <p class="popup__voting--popularity"> {{ film.popularity }} votes</p>
       </span>
@@ -43,12 +46,25 @@ export default {
       default: ''
     },
   },
+  beforeMount(){
+    this.shortenTitles()
+  },
   methods: {
     showPopupDialog() {
+      console.log(this.film.overview.length)
+      if(this.film.overview.toString().length > 1000){
+        this.film.overview = this.film.overview.toString().substring(0, 225) + '...';
+      }
       this.showPopup = true;
+
     },
     closePopup() {
       this.showPopup = false;
+
+    },
+    shortenTitles(){
+      this.film.title.length > 17 ? this.film.shortTitle = this.film.title.substring(0, 18) + '...' :
+      this.film.shortTitle = this.film.title;
 
     },
   }
@@ -57,18 +73,21 @@ export default {
 
 <style scoped lang="scss">
 .film {
-
+  font-family:Roboto, sans-serif;
   background: #2d2d2d;
   color: white;
-  width: 95%;
-  height: 100%;
-  font-size: 1.5em;
+  width: 258.66px;
+  height: 450px;
+  font-size: 1.2em;
+  font-weight:600;
   max-width: 264px;
-  max-height: 480px;
+  max-height: 490px;
   &__description {
     display: flex;
     justify-content: space-between;
     margin-left: 0.5em;
+    margin-top: 0.2em;
+
   }
 
   &__image {
@@ -76,15 +95,26 @@ export default {
     height: 388px;
     max-height:388px;
     max-width:264px;
-
-  }
-
   &:hover{
-    cursor: pointer;
-    transform: scale(1.05);
-    transition: transform 0.5s;
+    transform: scale(1.1);
+    transition: 0.5s;
+  }
   }
 
+  &__info{
+    position:absolute;
+    margin-left:0.5em;
+    width:30px;
+    color:white;
+    cursor: pointer;
+  }
+
+}
+
+.img__wrapper{
+  overflow:hidden;
+  height:388px;
+  width:258.66px;
 }
 
 .popup__header{
@@ -164,8 +194,8 @@ export default {
 
 @media (max-width: 1024px) {
   .film {
-    width: 100%;
-    height: 100%;
+    width: 258.66px;
+    height: 450px;
     font-size: 1em;
 
     &__image {
@@ -177,6 +207,14 @@ export default {
   .popup{
     width:100vw;
     height:50vh;
+    &__content{
+
+      &--title{
+      }
+    }
+    &__info{
+      font-size: 1em;
+    }
   }
 }
 
