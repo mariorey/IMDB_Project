@@ -12,6 +12,7 @@ export default {
   name: "CustomSearch",
   methods: {
     search: function(event){
+      this.$store.commit('setQuery', event.target.value)
       this.$store.dispatch('fetchFilm', event.target.value);
     }
   }

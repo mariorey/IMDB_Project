@@ -1,16 +1,17 @@
-<script>
+<script lang="ts">
 import CustomCard from "@/components/CustomCard.vue";
 import CardPopup from "@/components/CardPopup.vue";
 import {mapState} from "vuex";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "CustomCarousel",
   components: {CustomCard, CardPopup},
   data() {
     return {
       isDragging: false,
-      startX: null,
-      scrollLeft: null
+      startX: 0,
+      scrollLeft: 0
     }
   },
   computed:{
@@ -18,38 +19,39 @@ export default {
   },
   mounted() {
     this.$store.dispatch('fetchTrending')
+
   },
   methods: {
-    scrollLeftButton() {
-      let scroll = document.querySelector(".scroll");
+    scrollLeftButton(): void {
+      let scroll = document.querySelector(".scroll") as HTMLElement;
       scroll.style.scrollBehavior = "smooth"
       scroll.scrollLeft -= 1000;
       scroll.style.scrollBehavior = ""
 
     },
-    scrollRight() {
-      let scroll = document.querySelector(".scroll");
+    scrollRight(): void {
+      let scroll = document.querySelector(".scroll") as HTMLElement;
       scroll.style.scrollBehavior = "smooth"
       scroll.scrollLeft += 1000;
       scroll.style.scrollBehavior = ""
     },
-    startDragging(e) {
+    startDragging(e: MouseEvent): void {
       this.isDragging = true;
-      this.startX = e.clientX - this.$refs.scroll.offsetLeft;
-      this.scrollLeft = this.$refs.scroll.scrollLeft;
+      this.startX = e.clientX - (this.$refs.scroll as HTMLElement).offsetLeft;
+      this.scrollLeft = (this.$refs.scroll as HTMLElement).scrollLeft;
     },
-    dragging(e) {
+    dragging(e: MouseEvent): void {
       if (!this.isDragging) return;
       e.preventDefault();
-      const x = e.clientX - this.$refs.scroll.offsetLeft;
+      const x = e.clientX - (this.$refs.scroll as HTMLElement).offsetLeft;
       const distance = x - this.startX;
-      this.$refs.scroll.scrollLeft = this.scrollLeft - distance;
+      (this.$refs.scroll as HTMLElement).scrollLeft = this.scrollLeft - distance;
     },
     stopDragging() {
       this.isDragging = false;
     },
   },
-}
+})
 </script>
 
 <template>

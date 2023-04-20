@@ -32,8 +32,9 @@
 
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import {defineComponent} from "vue";
+export default defineComponent({
   name: "CustomCard",
   data() {
     return {
@@ -46,29 +47,28 @@ export default {
       default: ''
     },
   },
-  beforeMount(){
+  beforeMount(): void{
     this.shortenTitles()
   },
   methods: {
-    showPopupDialog() {
-      console.log(this.film.overview.length)
+    showPopupDialog(): void{
       if(this.film.overview.toString().length > 1000){
         this.film.overview = this.film.overview.toString().substring(0, 225) + '...';
       }
       this.showPopup = true;
 
     },
-    closePopup() {
+    closePopup(): void{
       this.showPopup = false;
 
     },
-    shortenTitles(){
+    shortenTitles(): void{
       this.film.title.length > 17 ? this.film.shortTitle = this.film.title.substring(0, 18) + '...' :
       this.film.shortTitle = this.film.title;
 
     },
   }
-}
+})
 </script>
 
 <style scoped lang="scss">
